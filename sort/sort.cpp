@@ -90,7 +90,7 @@ void countingSort(std::vector<T>& arr) {
       min = *min_element(arr.begin(), arr.end()),
       range = max - min + 1;
 
-    std::vector<int> count(range), result(arr.size());
+    std::vector<long long> count(range), result(arr.size());
 
     for (int i = 0; i < arr.size(); i++)
         count[arr[i] - min]++;
@@ -127,4 +127,32 @@ void bucketSort(std::vector<T>& arr) {
             i++;
         }
     }
+}
+
+/* radix sort */
+template <typename T>
+void countingSort(std::vector<T>& arr, int place) {
+    std::vector<long long> count(21), result(arr.size());
+
+    for (int i = 0; i < arr.size(); i++)
+        count[10 + (arr[i] / place % 10)]++;
+
+    for (int i = 1; i < count.size(); i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i >= 0; i--) {
+        result[count[10 + (arr[i] / place % 10)] - 1] = arr[i];
+        count[10 + (arr[i] / place % 10)]--;
+    }
+
+    for (int i = 0; i < arr.size(); i++)
+        arr[i] = result[i];
+}
+
+template <typename T>
+void radixSort(std::vector<T>& arr) {
+    T max = *max_element(arr.begin(), arr.end());
+
+    for (int place = 1; max / place > 0; place *= 10)
+        countingSort(arr, place);
 }

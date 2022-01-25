@@ -24,7 +24,7 @@ std::vector<int> genVector(int n) {
 typedef void (*fun) (std::vector<int>&);
 
 int main(int argc, char** argv) {
-    fun functions[] = {insertionSort, bubbleSort, mergeSort, countingSort, bucketSort};
+    fun functions[] = {insertionSort, bubbleSort, mergeSort, countingSort, bucketSort, radixSort};
     auto array = genVector(10);
     for (fun f : functions) {
         auto arr = array;
