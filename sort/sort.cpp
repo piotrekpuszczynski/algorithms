@@ -106,3 +106,25 @@ void countingSort(std::vector<T>& arr) {
     for (int i = 0; i < arr.size(); i++)
         arr[i] = result[i];
 }
+
+/* bucket sort */
+template <typename T>
+void bucketSort(std::vector<T>& arr) {
+    T max = *max_element(arr.begin(), arr.end()),
+      min = *min_element(arr.begin(), arr.end());
+    std::vector<std::vector<T>> buckets(arr.size());
+
+    for (auto& element : arr)
+        buckets[floor((element - min) * (arr.size() - 1) / (max - min))].push_back(element);
+
+    for (auto& bucket : buckets)
+        sort(bucket.begin(), bucket.end());
+
+    int i = 0;
+    for (auto& bucket : buckets) {
+        for (auto& element : bucket) {
+            arr[i] = element;
+            i++;
+        }
+    }
+}
