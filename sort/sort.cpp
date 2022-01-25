@@ -68,19 +68,19 @@ void merge(std::vector<T>& arr, int begin, int mid, int end) {
 }
 
 template <typename T>
-void split(std::vector<T>& arr, int begin, int end) {
+void splitMerge(std::vector<T>& arr, int begin, int end) {
     if (begin >= end)
         return;
 
     int mid = begin + (end - begin) / 2;
-    split(arr, begin, mid);
-    split(arr, mid + 1, end);
+    splitMerge(arr, begin, mid);
+    splitMerge(arr, mid + 1, end);
     merge(arr, begin, mid, end);
 }
 
 template <typename T>
 void mergeSort(std::vector<T>& arr) {
-    split(arr, 0, arr.size() - 1);
+    splitMerge(arr, 0, arr.size() - 1);
 }
 
 /* counting sort */
@@ -132,17 +132,17 @@ void bucketSort(std::vector<T>& arr) {
 /* radix sort */
 template <typename T>
 void countingSort(std::vector<T>& arr, int place) {
-    std::vector<long long> count(21), result(arr.size());
+    std::vector<long long> count(20), result(arr.size());
 
     for (int i = 0; i < arr.size(); i++)
-        count[10 + (arr[i] / place % 10)]++;
+        count[10 + (arr[i] / place) % 10]++;
 
     for (int i = 1; i < count.size(); i++)
         count[i] += count[i - 1];
 
     for (int i = arr.size() - 1; i >= 0; i--) {
-        result[count[10 + (arr[i] / place % 10)] - 1] = arr[i];
-        count[10 + (arr[i] / place % 10)]--;
+        result[count[10 + (arr[i] / place) % 10] - 1] = arr[i];
+        count[10 + (arr[i] / place) % 10]--;
     }
 
     for (int i = 0; i < arr.size(); i++)
@@ -151,8 +151,57 @@ void countingSort(std::vector<T>& arr, int place) {
 
 template <typename T>
 void radixSort(std::vector<T>& arr) {
-    T max = *max_element(arr.begin(), arr.end());
+    T max = abs(*max_element(arr.begin(), arr.end())),
+      min = abs(*min_element(arr.begin(), arr.end()));
 
-    for (int place = 1; max / place > 0; place *= 10)
+    T absMax = max > min ? max : min;
+
+    for (int place = 1; absMax / place > 0; place *= 10)
         countingSort(arr, place);
+}
+
+/* quick sort */
+template <typename T>
+void swap(std::vector<T>& arr, int a, int b) {
+    if (a != b) {
+        T temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
+
+int indexSelection(int begin, int end) {
+    return begin + (end - begin) / 2;
+}
+
+template <typename T>
+int partition(std::vector<T>& arr, int begin, int end) {
+    int index = indexSelection(begin, end);
+    T value = arr[index];
+    swap(arr, index, end);
+
+    int cur = begin;
+    for (int i = begin; i < end; i++) {
+        if (arr[i] < value) {
+            swap(arr, i, cur);
+            cur++;
+        }
+    }
+
+    swap(arr, cur, end);
+    return cur;
+}
+
+template <typename T>
+void splitQuick(std::vector<T>& arr, int begin, int end) {
+    if (begin < end) {
+        int i = partition(arr, begin, end);
+        splitQuick(arr, begin, i - 1);
+        splitQuick(arr, i + 1, end);
+    }
+}
+
+template <typename T>
+void quickSort(std::vector<T>& arr) {
+    splitQuick(arr, 0, arr.size() - 1);
 }
