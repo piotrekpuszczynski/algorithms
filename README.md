@@ -1,1 +1,9 @@
-Algorithms implementations in cpp
+Algorithms visualizer
+
+run:
+```
+% cd build
+% cmake -GNinja ../
+% ninja
+% ./visualizer
+```
