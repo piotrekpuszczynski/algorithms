@@ -1,4 +1,4 @@
-add_library(sort src/insertionSort.cpp)
+add_library(sort src/insertionSort.cpp src/bubbleSort.cpp)
 target_include_directories(sort PUBLIC include)
 
 add_executable(sort_tests uts/sortTests.cpp)

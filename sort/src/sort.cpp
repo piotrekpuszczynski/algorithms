@@ -2,23 +2,6 @@
 #include <algorithm>
 
 namespace algorithms {
-
-/* bubble sort */
-    template <typename T>
-    void bubbleSort(std::vector<T>& arr) {
-        int n = arr.size();
-        do {
-            for (int i = 0; i < n - 1; i++) {
-                if (arr[i] > arr[i + 1]) {
-                    T temp = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = temp;
-                }
-            }
-            n--;
-        } while (n > 1);
-    }
-
 /* merge sort */
     template <typename T>
     void merge(std::vector<T>& arr, int begin, int mid, int end) {

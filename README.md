@@ -5,9 +5,7 @@ compilation:
 % cmake -GNinja ..
 ```
 
-tests:
+unit tests:
 ```
-% ninja
-or
-% ninja <algorithm / algorithm_type>
+% ninja test
 ```

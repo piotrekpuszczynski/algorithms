@@ -13,4 +13,4 @@ namespace algorithms {
 
 }
 
-#endif
+#endif //ALGORITHMS_INSERTIONSORT_HPP
