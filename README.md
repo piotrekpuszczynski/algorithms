@@ -1,9 +1,13 @@
-Algorithms visualizer
-
-run:
+compilation:
 ```
+% mkdir build
 % cd build
-% cmake -GNinja ../
+% cmake -GNinja ..
+```
+
+tests:
+```
 % ninja
-% ./visualizer
+or
+% ninja <algorithm / algorithm_type>
 ```
