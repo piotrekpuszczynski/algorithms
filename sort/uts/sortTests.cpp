@@ -2,6 +2,11 @@
 
 #include <insertionSort.hpp>
 #include <bubbleSort.hpp>
+#include <mergeSort.hpp>
+#include <countingSort.hpp>
+#include <bucketSort.hpp>
+#include <quickSort.hpp>
+#include <radixSort.hpp>
 
 typedef void (*fun) (std::vector<int>&);
 
@@ -86,5 +91,10 @@ INSTANTIATE_TEST_SUITE_P(sortTest,
                         sortParameterizedTest,
                         ::testing::Values(
                                 (fun) algorithms::insertion_sort,
-                                (fun) algorithms::bubble_sort
+                                (fun) algorithms::bubble_sort,
+                                (fun) algorithms::merge_sort,
+                                (fun) algorithms::counting_sort,
+                                (fun) algorithms::bucket_sort,
+                                (fun) algorithms::radix_sort,
+                                (fun) algorithms::quick_sort
                                 ));

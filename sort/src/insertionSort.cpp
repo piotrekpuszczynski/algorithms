@@ -18,7 +18,7 @@ namespace algorithms {
 }
 
 // function allows creation of template functions for arm64 architecture
-void empty() {
+void emptyInsertion() {
     std::vector<int> temp;
     algorithms::insertion_sort(temp);
 }

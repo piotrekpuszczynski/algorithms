@@ -20,7 +20,7 @@ namespace algorithms {
 }
 
 // function allows creation of template functions for arm64 architecture
-void emptyr() {
+void empty_bubble() {
     std::vector<int> temp;
     algorithms::bubble_sort(temp);
 }
